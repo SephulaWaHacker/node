@@ -1,0 +1,39 @@
+doctype html
+html
+head
+	meta(charset="UTF-8")
+	title WeatherApp
+	link(rel="stylesheet", href="style.css")
+
+body
+	div#container
+		h1#title WeatherApp
+		form(action='/results')
+			input(type='text' id='city' name='city' placeholder='Search City' onfocus='value""' method="GET" autofocus)
+			input(type='submit' value='Search')
+
+		block results
+			div#items
+				h1#temp  
+				h3#location 
+				h3#condition 
+			script.
+				const url = "https://api.openweathermap.org/data/2.5/weather?q="
+				const appid = "882990885b70af521d129929fe66d35d"
+
+				let request = async() =>  {
+						const response = await fetch(url+"johannesburg&appid="+appid+"&units=metric");
+						const json = await response.json();
+						
+						document.getElementById("temp").innerHTML = json.main.temp +"&deg";
+
+						document.getElementById("location").innerHTML = json.name +","+json.sys.country;
+						
+						document.getElementById("condition").innerHTML = json.weather[0].description;
+						
+						document.getElementById("icon").innerHTML= "http://openweathermap.org/img/w/"+json.main.icon+".png";
+
+						console.log(temp);
+						console.log(json.name +","+json.sys.country);
+					};
+				request()

@@ -1,0 +1,17 @@
+p Hello from Flavio
+
+
+ul
+  each color in ['Red', 'Yellow', 'Blue']
+    li= color
+
+ul
+  each color, index in ['Red', 'Yellow', 'Blue']
+    li= 'Color number ' + index + ': ' + color
+
+mixin pet(name)
+  li.pet= name
+ul
+  +pet('cat')
+  +pet('dog')
+  +pet('pig')
