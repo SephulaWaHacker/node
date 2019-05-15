@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Task2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 align="center">Travel Authorisation Form</h1>
+        <hr>
+        <h2>Section A: Client Information</h2>
+        <br>
+        <form action="/json" method="GET">
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" class="form-control" placeholder="Enter title" name="title">
+                <label>First Name:</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Enter firstName" name="fname">
+                <label>Middle Initial:</label>
+                <input type="text" class="form-control" id="initial" placeholder="Enter initial" name="initial">
+                <label>Last Name:</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Enter lastName" name="lname">
+                <label>Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <label>Phone Number:</label>
+                <input type="number" class="form-control" id="phoneNumber" placeholder="Enter CellNumber" name="cellnumber">
+            </div>
+            <br>
+            <hr>
+            <h2>Section B: Travel Information</h2>
+            <br>
+            <div class="form-group col-sm-6">
+                <div class="form-group">
+                    <label>Airline Name):</label>
+                    <select class="form-control" id="airline" name="airline">
+                        <option selected="true" disabled>Select an airline</option>
+                        <option value="SAA">SAA</option>
+                        <option value="Mango">Mango</option>
+                        <option value="British">British Airways</option>
+                        <option value="Qatar">Qatar Airways</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Destination:</label>
+                    <input type="destination" class="form-control" id="destination" placeholder="Enter destination" name="destination">
+                </div>
+                <div class="form-group">
+                    <label>Leave Date:</label>
+                    <input type="date" class="form-control" id="leaveDate" placeholder="" name="leaveDate">
+                </div>
+                <div class="form-group">
+                    <label>Return Date:</label>
+                    <input type="date" class="form-control" id="returnDate" placeholder="" name="returnDate">
+                </div>
+                <div class="form-group ">
+                    <label>Estimated Cost:</label>
+                    <input type="number" class="form-control" id="cost" placeholder="" name="estcost">
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="custVisit" name="custVisit">
+                    <label>Includes customer visit?</label>
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <h4>Additional estimated expenses:</h4>
+                <div class="form-group">
+                    <label>Car rental:</label>
+                    <input type="number" class="form-control" id="carrental" placeholder="" name="carrental">
+                </div>
+                <div class="form-group">
+                    <label>Hotel:</label>
+                    <input type="number" class="form-control" id="hotel" placeholder="Enter hotel name" name="hotel">
+                </div>
+                <div class="form-group">
+                    <label>Meals:</label>
+                    <input type="number" class="form-control" id="meals" placeholder="Enter destination" name="meals">
+                </div>
+                <div class="form-group">
+                    <label>Total estimate:</label>
+                    <input type="number" class="form-control" id="totalest" placeholder="Enter destination" name="totalest">
+                </div>
+                <br>
+                <div class="custom-control custom-radio">
+                    <h4>Payment method used:</h4>
+                    <input type="radio" class="custom-control-input" id="cash" name="payment" checked value="cash">
+                    <label>Cash</label><br>
+                    <input type="radio" class="custom-control-input" id="credit" name="payment" value="credit">
+                    <label>Credit Card</label><br>
+                    <input type="radio" class="custom-control-input" id="check" name="payment" value="check">
+                    <label>Cheque</label>
+                </div>
+            </div>
+            <div class="form-group blue-border-focus">
+                <label>Purpose for travel:</label>
+                <textarea class="form-control" id="purpose" rows="3" name="purpose"></textarea>
+            </div>
+            <hr>
+            <div class="form-group col-sm-7">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ extends home.pug
 block results
 			div#items
 				h1#temp  
-				h3#location 
+				h3#location
 				h3#condition 
 			script.
 
@@ -20,7 +20,7 @@ block results
 						
 						document.getElementById("condition").innerHTML = json.weather[0].description;
 						
-						document.getElementById("icon").innerHTML= "http://openweathermap.org/img/w/"+json.main.icon+".png";
+						document.getElementById("icon").innerHTML= "http://openweathermap.org/img/w/"+json.weather[0].icon+".png";
 
 						console.log(temp);
 						console.log(json.name +","+json.sys.country);

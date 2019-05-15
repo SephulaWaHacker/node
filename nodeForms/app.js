@@ -4,28 +4,48 @@ const open = require('open')
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
+app.use(express.static('.'));
+
 app.get("/form", function(req, res) {
-   let html = "";
+   /*let html = "";
+   html += "<html>";
+   html += "<head>";
+   html += "<link rel = 'stylesheet'  href = 'style.css'/>" 
+   html += "</head>";
    html += "<body>";
    html += "<form action='/formResponse'  method='post' name='form1'>";
-   html += "Name:</p><input type= 'text' name='name'>";
-   html += "Email:</p><input type='text' name='email'>";
-   html += "address:</p><input type='text' name='address'>";
-   html += "Cellphone Number:</p><input type='text' name='cellphoneno'>";
+   html += "<label>Name :</label><input type= 'text' name='name'><br>";
+   html += "<label>Email :</label><input type='text' name='email'><br>";
+   html += "<label>Address :</label><input type='text' name='address'><br>";
+   html += "<label>Cellphone :</label></p><input type='text' name='cellphoneno'><br>";
    html += "<input type='submit' value='submit'>";
    html += "</form>";
    html += "</body>";
-   res.send(html);
+   html += "</html>";*/
+   res.sendFile( __dirname +"/form.html");
 });
 
-app.post("/formResponse", urlencodedParser, function(req, res) {
-   let response = {
-      Name: req.body.name,
-      Email: req.body.email,
-      Address: req.body.address,
-      "Cellphone Number": req.body.cellphoneno
+app.get("/json", (req, res) => {
+   let json_response = {
+      title: req.query.title,
+      "first name": req.query.fname,
+      "middle initial": req.query.initial,
+      "last name": req.query.lname,
+      email: req.query.email,
+      "cell number": req.query.cellnumber,
+      airline: req.query.airline,
+      destination: req.query.destination,
+      "leave date": req.query.leavedate,
+      "return date": req.query.returndate,
+      "estimated cost": req.query.estcost,
+      "car rental": req.query.carrental,
+      hotel: req.query.hotel,
+      meals: req.query.meals,
+      "total estimate": req.query.totalest,
+      "payment method": req.query.payment,
+      "purpose of travel": req.query.purpose
    };
-   res.send(JSON.stringify(response));
+   res.send(JSON.stringify(json_response, null, 4));
 });
 
 var server = app.listen(8000, () => {
