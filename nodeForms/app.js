@@ -7,21 +7,6 @@ const urlencodedParser = bodyParser.urlencoded({ extended: true });
 app.use(express.static('.'));
 
 app.get("/form", function(req, res) {
-   /*let html = "";
-   html += "<html>";
-   html += "<head>";
-   html += "<link rel = 'stylesheet'  href = 'style.css'/>" 
-   html += "</head>";
-   html += "<body>";
-   html += "<form action='/formResponse'  method='post' name='form1'>";
-   html += "<label>Name :</label><input type= 'text' name='name'><br>";
-   html += "<label>Email :</label><input type='text' name='email'><br>";
-   html += "<label>Address :</label><input type='text' name='address'><br>";
-   html += "<label>Cellphone :</label></p><input type='text' name='cellphoneno'><br>";
-   html += "<input type='submit' value='submit'>";
-   html += "</form>";
-   html += "</body>";
-   html += "</html>";*/
    res.sendFile( __dirname +"/form.html");
 });
 
