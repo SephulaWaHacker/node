@@ -107,35 +107,53 @@ app.get("/api/v1/prospects", (req, res) => {
 	});
 });
 
-app.get("/api/v1/prospects/:id", (req, res) => {
-	const id = parseInt(req.params.id, 10);
-	console.log(typeof id);
+app.get("/api/v1/prospects2/:id", (req, res) => {
+	/*	db.map(prospect => {
+		if (prospect.id === id) {
+			return res.send({
+				success: "true",
 
-	Prospects.find((err, prospects) => {
-		if (err) return console.error(err);
+				message: "prospect successfully retrieved",
 
-		prospects.map(prospect => {
-			if (prospect.id === id) {
+				prospect
+			});
+		}
+	});*/
+	Prospects.find((err, prospect) => {
+		prospect.forEach(item => {
+			//let getParam = req.params.id.replace(/[^0-9]/g, "");
+			let id = parseInt(req.params.id, 10);
 
-				console.log("item id is" + id);
-				console.log(prospect);
+			console.log(`item.id is ${item.id} and request id is ${id}`);
 
-				res.status(200).send({
+
+			if (item.id == id){	
+				console.log('in if statement');
+				return res.status(200).send({
+					success: "true",
+
+					message: "prospect successfully retrieved",
+					
+					item
+				})
+/*				return res.status(200).send({
 					success: "true",
 
 					message: "prospect successfully retrieved",
 
-					prospect
-				});
+					item
+				});*/
 			}
 		});
 	});
 
-	return res.status(404).send({
+/*	return res.status(404).send({
 		success: "false",
 
-		message: "prospect does not exist"
-	});
+		message: "prospect does not exist",
+
+		log: "Number of prospect is " + req.params.id
+	});*/
 });
 
 app.delete("/api/v1/deleteProspect/:id", (req, res) => {
