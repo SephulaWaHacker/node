@@ -1,6 +1,4 @@
 const express = require("express");
-import db from "./db";
-const stringify = require("json-stringify-safe");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const open = require("open");
@@ -8,12 +6,14 @@ const app = express();
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 mongoose.connect("mongodb://127.0.0.1:27017/task4", { useNewUrlParser: true });
+mongoose.set('useFindAndModify', false);
 
 const Prospects = mongoose.model("Prospects", {
 	id: Number,
 	name: String,
 	surname: String,
 	age: Number,
+	gender: String,
 	date: { type: Date, default: Date.now },
 	email: String,
 	cell_number: Number,
@@ -40,6 +40,11 @@ app.post("/api/v1/prospects", (req, res) => {
 		return res.status(400).send({
 			success: "false",
 			message: "age is required"
+		});
+	} else if (!req.body.gender){
+		return res.status(400).send({
+			success: "false",
+			message: "gender is required"
 		});
 	} else if (!req.body.email) {
 		return res.status(400).send({
@@ -76,6 +81,7 @@ app.post("/api/v1/prospects", (req, res) => {
 			name: req.body.name,
 			surname: req.body.surname,
 			age: req.body.age,
+			gender: req.params.gender, 
 			date: Date(),
 			email: req.body.email,
 			cell_number: req.body.cell_number,
@@ -107,104 +113,53 @@ app.get("/api/v1/prospects", (req, res) => {
 	});
 });
 
-app.get("/api/v1/prospects2/:id", (req, res) => {
-	/*	db.map(prospect => {
-		if (prospect.id === id) {
-			return res.send({
-				success: "true",
-
-				message: "prospect successfully retrieved",
-
-				prospect
-			});
-		}
-	});*/
-	Prospects.find((err, prospect) => {
+app.get("/api/v1/prospects/:id", (req, res) => {
+Prospects.find((err, prospect) => {
 		prospect.forEach(item => {
-			//let getParam = req.params.id.replace(/[^0-9]/g, "");
 			let id = parseInt(req.params.id, 10);
-
 			console.log(`item.id is ${item.id} and request id is ${id}`);
-
-
 			if (item.id == id){	
 				console.log('in if statement');
 				return res.status(200).send({
 					success: "true",
-
 					message: "prospect successfully retrieved",
-					
-					item
+					prospect: item
 				})
-/*				return res.status(200).send({
-					success: "true",
-
-					message: "prospect successfully retrieved",
-
-					item
-				});*/
 			}
 		});
 	});
-
-/*	return res.status(404).send({
-		success: "false",
-
-		message: "prospect does not exist",
-
-		log: "Number of prospect is " + req.params.id
-	});*/
 });
 
 app.delete("/api/v1/deleteProspect/:id", (req, res) => {
-	let getParam = req.params.id.replace(/[^0-9]/g, "");
-	let id = parseInt(getParam);
-	console.log(id);
+	let id = parseInt(req.params.id, 10)
+	Prospects.deleteOne({id: id}, (err, prospect) => {
+		if(err) return console.log(err);
+		res.status(200).send({
+			success: true,
+			message: "prospect deleted successfully",
+			prospect
+		})
+	})
 
-	db.map((prospect, index) => {
-		if (prospect.id === id) {
-			db.splice(index, 1);
-			return res.status(200).send({
-				success: "true",
-				message: "prospect deleted successfuly"
-			});
-		}
-	});
-
-	return res.status(404).send({
+/*	return res.status(404).send({
 		success: "false",
 		message: "prospect not found"
-	});
+	});*/
 });
 
 app.delete("/api/v1/deleteAllProspects", (req, res) => {
-	db.length = 0;
-	return res.status(200).send({
-		success: "true",
-		message: "all prospects deleted successfuly"
-	});
+	Prospects.deleteMany((err, prospect) => {
+		if(err) return console.log(err);
+
+		res.status(200).send({
+			success: true,
+			message: "all prospects deleted successfully",
+			prospect
+		})
+	})
 });
 
 app.put("/api/v1/prospects/:id", (req, res) => {
-	let getParam = req.params.id.replace(/[^0-9]/g, "");
-	let id = parseInt(getParam);
-	console.log(id);
-
-	let prospectFound;
-	let itemIndex;
-	db.map((prospect, index) => {
-		if (prospect.id === id) {
-			prospectFound = prospect;
-			itemIndex = index;
-		}
-	});
-
-	if (!prospectFound) {
-		return res.status(404).send({
-			success: "false",
-			message: "prospect not found"
-		});
-	}
 
 	if (!req.body.name) {
 		return res.status(400).send({
@@ -220,6 +175,11 @@ app.put("/api/v1/prospects/:id", (req, res) => {
 		return res.status(400).send({
 			success: "false",
 			message: "age is required"
+		});
+	} else if (!req.body.gender){
+		return res.status(400).send({
+			success: "false",
+			message: "gender is required"
 		});
 	} else if (!req.body.email) {
 		return res.status(400).send({
@@ -248,25 +208,34 @@ app.put("/api/v1/prospects/:id", (req, res) => {
 		});
 	}
 
-	const updatedprospect = {
-		id: prospectFound.id,
+	const updateProspect = {
+	//	id: req.param.id,
 		name: req.body.name,
 		surname: req.body.surname,
 		age: req.body.age,
+		gender: req.params.gender, 
 		email: req.body.email,
 		cell_number: req.body.cell_number,
 		location: req.body.location,
-		relocate: req.body.relocate,
+		relocate: JSON.parse(req.body.relocate),
 		course: req.body.course
 	};
+	let id = parseInt(req.params.id, 10)
+	console.log(`user id is ${id} and id is a ${typeof id}`);
+	Prospects.findOneAndUpdate({id: id}, updateProspect, (err, prospect) => {
+		if(err) return console.log(err);
+		return res.status(200).send({
+			success: true,
+			message: "prospect updated successfully",
+			prospect: updateProspect
+		});
+	});
 
-	db.splice(itemIndex, 1, updatedprospect);
-
-	return res.status(201).send({
+/*	return res.status(201).send({
 		success: "true",
 		message: "prospect added successfully",
 		updatedprospect
-	});
+	});*/
 });
 
 let server = app.listen(9000, () => {
