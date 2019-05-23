@@ -117,9 +117,7 @@ app.get("/api/v1/prospects/:id", (req, res) => {
 Prospects.find((err, prospect) => {
 		prospect.forEach(item => {
 			let id = parseInt(req.params.id, 10);
-			console.log(`item.id is ${item.id} and request id is ${id}`);
 			if (item.id == id){	
-				console.log('in if statement');
 				return res.status(200).send({
 					success: "true",
 					message: "prospect successfully retrieved",
