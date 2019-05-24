@@ -5,6 +5,9 @@ const open = require("open");
 const app = express();
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 mongoose.connect("mongodb://127.0.0.1:27017/task4", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 
@@ -22,10 +25,9 @@ const Prospects = mongoose.model("Prospects", {
 	course: String
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
+//create new prospect
 app.post("/api/v1/prospects", (req, res) => {
+	
 	if (!req.body.name) {
 		return res.status(400).send({
 			success: "false",
@@ -75,13 +77,12 @@ app.post("/api/v1/prospects", (req, res) => {
 
 	Prospects.find((err, prospects) => {
 		if (err) return console.error(err);
-
 		const prospect = {
 			id: prospects.length + 1,
 			name: req.body.name,
 			surname: req.body.surname,
 			age: req.body.age,
-			gender: req.params.gender, 
+			gender: req.body.gender, 
 			date: Date(),
 			email: req.body.email,
 			cell_number: req.body.cell_number,
@@ -101,54 +102,64 @@ app.post("/api/v1/prospects", (req, res) => {
 	});
 });
 
+//view all prospects
 app.get("/api/v1/prospects", (req, res) => {
 	Prospects.find((err, prospects) => {
 		if (err) return console.error(err);
-		console.log(prospects);
-		return res.status(201).send({
-			success: "true",
-			message: "all prospect retrieved successfully",
+		else if (prospects.length === 0)
+			return res.status(404).send({
+				success: false,
+				message:"no prospects found"
+			})
+		else if (prospects) 
+			return res.status(200).send({
+			success: true,
+			message: "prospects retrieved successfully",
 			prospects: prospects
 		});
 	});
 });
 
+//view prospect by id
 app.get("/api/v1/prospects/:id", (req, res) => {
-Prospects.find((err, prospect) => {
-		prospect.forEach(item => {
-			let id = parseInt(req.params.id, 10);
-			if (item.id == id){	
-				return res.status(200).send({
-					success: "true",
-					message: "prospect successfully retrieved",
-					prospect: item
-				})
+	let id = parseInt(req.params.id, 10);
+	Prospects.find((err, prospect) => {
+		if(err) return console.log(err);
+		else if (prospect.length < id)
+			return res.status(404).send({
+				success: false,
+				message: "prospects not found"
+			})
+		else prospect.forEach(item => {
+				if (item.id === id){	
+					return res.status(200).send({
+						success: true,
+						message: "prospect successfully retrieved",
+						prospect: item
+					})
 			}
 		});
 	});
 });
 
+//delete prospect by id
 app.delete("/api/v1/deleteProspect/:id", (req, res) => {
 	let id = parseInt(req.params.id, 10)
 	Prospects.deleteOne({id: id}, (err, prospect) => {
 		if(err) return console.log(err);
-		res.status(200).send({
-			success: true,
-			message: "prospect deleted successfully",
-			prospect
-		})
+		else if(prospect) 
+			return res.status(200).send({
+				success: true,
+				message: "prospect deleted successfully",
+				prospect
+			})
 	})
-
-/*	return res.status(404).send({
-		success: "false",
-		message: "prospect not found"
-	});*/
 });
 
+//delete all prospects
 app.delete("/api/v1/deleteAllProspects", (req, res) => {
 	Prospects.deleteMany((err, prospect) => {
 		if(err) return console.log(err);
-
 		res.status(200).send({
 			success: true,
 			message: "all prospects deleted successfully",
@@ -157,6 +168,7 @@ app.delete("/api/v1/deleteAllProspects", (req, res) => {
 	})
 });
 
+//update prospect by id
 app.put("/api/v1/prospects/:id", (req, res) => {
 
 	if (!req.body.name) {
@@ -207,19 +219,18 @@ app.put("/api/v1/prospects/:id", (req, res) => {
 	}
 
 	const updateProspect = {
-	//	id: req.param.id,
 		name: req.body.name,
 		surname: req.body.surname,
 		age: req.body.age,
-		gender: req.params.gender, 
+		gender: req.body.gender,
 		email: req.body.email,
 		cell_number: req.body.cell_number,
 		location: req.body.location,
 		relocate: JSON.parse(req.body.relocate),
 		course: req.body.course
 	};
-	let id = parseInt(req.params.id, 10)
-	console.log(`user id is ${id} and id is a ${typeof id}`);
+
+	let id = parseInt(req.params.id, 10);
 	Prospects.findOneAndUpdate({id: id}, updateProspect, (err, prospect) => {
 		if(err) return console.log(err);
 		return res.status(200).send({
@@ -228,12 +239,6 @@ app.put("/api/v1/prospects/:id", (req, res) => {
 			prospect: updateProspect
 		});
 	});
-
-/*	return res.status(201).send({
-		success: "true",
-		message: "prospect added successfully",
-		updatedprospect
-	});*/
 });
 
 let server = app.listen(9000, () => {
