@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 mongoose.connect("mongodb://127.0.0.1:27017/task4", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 
+
 const Prospects = mongoose.model("Prospects", {
 	id: Number,
 	name: String,
@@ -26,7 +27,7 @@ const Prospects = mongoose.model("Prospects", {
 });
 
 //create new prospect
-app.post("/api/v1/prospects", (req, res) => {
+app.post("/api/v1/makeProspect", (req, res) => {
 	
 	if (!req.body.name) {
 		return res.status(400).send({
@@ -103,7 +104,7 @@ app.post("/api/v1/prospects", (req, res) => {
 });
 
 //view all prospects
-app.get("/api/v1/prospects", (req, res) => {
+app.get("/api/v1/allProspects", (req, res) => {
 	Prospects.find((err, prospects) => {
 		if (err) return console.error(err);
 		else if (prospects.length === 0)
@@ -121,7 +122,7 @@ app.get("/api/v1/prospects", (req, res) => {
 });
 
 //view prospect by id
-app.get("/api/v1/prospects/:id", (req, res) => {
+app.get("/api/v1/viewProspect/:id", (req, res) => {
 	let id = parseInt(req.params.id, 10);
 	Prospects.find((err, prospect) => {
 		if(err) return console.log(err);
@@ -169,7 +170,7 @@ app.delete("/api/v1/deleteAllProspects", (req, res) => {
 });
 
 //update prospect by id
-app.put("/api/v1/prospects/:id", (req, res) => {
+app.put("/api/v1/updateProspects/:id", (req, res) => {
 
 	if (!req.body.name) {
 		return res.status(400).send({
