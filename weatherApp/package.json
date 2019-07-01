@@ -5,8 +5,5 @@
       "nodemon": "^1.19.0",
       "open": "^6.2.0",
       "pug": "^2.0.3"
-   },
-   "scripts": {
-      "start": "nodemon --watch ./ -e js,pug,sass,css"
    }
 }
