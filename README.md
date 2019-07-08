@@ -2,7 +2,7 @@
 	- npm install -g nodemon forever
 
 # Task1 : Http server (http, get, serve static files) 
-It's a script which server a memory game on port 8080.
+It's a script which serves a memory game on port 8080.
 
 Instructions
 	- git clone https://github.com/SweetBeard30/node.git
