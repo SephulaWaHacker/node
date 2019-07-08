@@ -3,7 +3,7 @@
     "express": "^4.17.1",
     "open": "^6.4.0"
   },
-  scripts:{
+  "scripts":{
     "test":"nodemon index.js",
     "start":"forever start index.js"
   }
