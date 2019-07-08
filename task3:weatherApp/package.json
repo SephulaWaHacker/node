@@ -5,5 +5,9 @@
       "nodemon": "^1.19.0",
       "open": "^6.2.0",
       "pug": "^2.0.3"
-   }
+   },
+  "scripts":{
+	"test":"nodemon server.js",
+	"start":"forever start server.js"
+  }
 }
