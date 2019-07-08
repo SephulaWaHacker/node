@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const create = require('../controllers/createProspect.js')
+const viewProspectById = require('../controllers/viewProspectById')
 
-app.use(router);
+router.get('/api/v1.1/viewProspect/:id', viewProspectById);
 
-router.get('/api/v1/viewProspect/:id', (req, res) => {
-
-});
+module.exports = router;

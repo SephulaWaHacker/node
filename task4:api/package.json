@@ -10,7 +10,9 @@
     "helmet": "^3.18.0",
     "mongoose": "^5.5.8",
     "morgan": "^1.9.1",
-    "nodemon": "^1.19.0",
-    "open": "^6.3.0"
-  }
+    "nodemon": "^1.19.0"
+  },
+  "scripts":{
+	"test":"nodemon server.js",
+	"start":"forever start server.js"}
 }

@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const open = require("open");
 const app = express();
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
@@ -28,6 +27,16 @@ const Prospects = mongoose.model("Prospects", {
 
 //create new prospect
 app.post("/api/v1/makeProspect", (req, res) => {
+	// (!req.body.name) ? (res.status(400).send({success: "false",message: "name is required"}))
+	// :(!req.body.surname) ? (res.status(400).send({success: "false",message: "surname is required"}))
+	// :(!req.body.age) ? (res.status(400).send({success: "false",message: "age is required"}))
+	// :(!req.body.gender) ? (res.status(400).send({success: "false",message: "gender is required"}))
+	// :(!req.body.email) ? (res.status(400).send({success: "false",message: "email is required"}))
+	// :(!req.body.cell_number) ? (res.status(400).send({success: "false",message: "Cell number is required"}))
+	// :(!req.body.location) ? (res.status(400).send({success: "false",message: "location is required"}))
+	// :(!req.body.relocate) ? (res.status(400).send({success: "false",message: "relocate is required"}))
+	// :(!req.body.course) ? (res.status(400).send({success: "false",message: "course is required"}))
+	// : null;
 	
 	if (!req.body.name) {
 		return res.status(400).send({
@@ -98,7 +107,7 @@ app.post("/api/v1/makeProspect", (req, res) => {
 		return res.status(201).send({
 			success: "true",
 			message: "prospect added successfully",
-			prospect: prospect
+			prospect: userInput
 		});
 	});
 });
@@ -245,5 +254,4 @@ app.put("/api/v1/updateProspects/:id", (req, res) => {
 let server = app.listen(9000, () => {
 	let host = "http://127.0.0.1:9000";
 	console.log("App listening at %s", host);
-	open(host);
 });

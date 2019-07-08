@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const create = require('../controllers/createProspect.js')
+const viewAllProspects = require('../controllers/viewAllProspects')
 
-app.use(router);
+router.get('/api/v1.1/allProspects', viewAllProspects);
 
-router.get('/api/v1/allProspects', (req, res) => {
-
-});
+module.exports = router;
