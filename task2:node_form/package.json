@@ -3,7 +3,7 @@
     "express": "^4.16.4",
     "open": "^6.2.0"
   }
-  "scripts":{
+  "scripts": {
 	"test":"nodemon server.js",
 	"start":"forever start server.js"
   }
