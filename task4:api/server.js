@@ -11,6 +11,7 @@ const updateProspectByIdRoute = require('./routes/updateProspectById');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(addNewProspectRoute);
 app.use(viewAllProspectsRoute);
 app.use(viewProspectByIdRoute);

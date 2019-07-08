@@ -1,7 +1,7 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-const viewAllProspects = require('../controllers/viewAllProspects')
+const deleteAllProspects = require('../controllers/deleteAllProspects');
 
-router.post('/api/v1.1/allProspects', viewAllProspects);
+router.delete('/api/v1.1/deleteAllProspects', deleteAllProspects);
 
 module.exports = router;

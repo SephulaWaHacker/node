@@ -6,7 +6,7 @@ const Prospects = require('../models/prospects')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const viewProspectById = (req,res)=> {
+const deleteProspectById = (req,res)=> {
 	let id = parseInt(req.params.id, 10);
 	Prospects.deleteOne({id: id}, (err, prospect) => {
 		if(err) return console.log(err);
@@ -15,8 +15,8 @@ const viewProspectById = (req,res)=> {
 				success: true,
 				message: "prospect deleted successfully",
 				prospect
-			})
+			});
 	});
 };
 
-module.exports = viewProspectById;
+module.exports = deleteProspectById;
