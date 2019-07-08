@@ -14,5 +14,6 @@
   },
   "scripts":{
 	"test":"nodemon server.js",
-	"start":"forever start server.js"}
+	"start":"forever start server.js"
+  }
 }
