@@ -3,16 +3,18 @@
 
 ### Instructions
 
-    {git clone https://github.com/SweetBeard30/node.git}
-    cd node/task4:api
     npm install
+
     npm start
+
     Use [Postmam](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/) rest api clients to test end-points
+
     listens to port:9001
+
     The back-end service provides the following end points:
-        * /api/v1.1/addNewProspect (add a new prospect)
-        * /api/v1.1/deleteAllProspects (delete all prospects)
-        * /api/v1.1/deleteProspect/:id (delete a single prospect)
-        * /api/v1.1/allProspects (view all prospects)
-        * /api/v1.1/viewProspect/:id (view a single prospect)
-        * /api/v1.1/updateProspect/:id (Update a single prospect)
+        - /api/v1.1/addNewProspect (add a new prospect)
+        - /api/v1.1/deleteAllProspects (delete all prospects)
+        - /api/v1.1/deleteProspect/:id (delete a single prospect)
+        - /api/v1.1/allProspects (view all prospects)
+        - /api/v1.1/viewProspect/:id (view a single prospect)
+        - /api/v1.1/updateProspect/:id (Update a single prospect)
