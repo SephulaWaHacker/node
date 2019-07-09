@@ -2,10 +2,11 @@
 > > > Is a rest api server which can capture a new prospect, return all captured prospects to a client, return one prospect by id to a client, update one prospect by it's id, delete all prospects and delete one prospects by it's id.
 
 ### Instructions
-    // `git clone https://github.com/SweetBeard30/node.git`
-    `cd node/task4:api`
-    `npm install`
-    `npm start`
+
+    {git clone https://github.com/SweetBeard30/node.git}
+    cd node/task4:api
+    npm install
+    npm start
     Use [Postmam](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/) rest api clients to test end-points
     listens to port:9001
     The back-end service provides the following end points:
