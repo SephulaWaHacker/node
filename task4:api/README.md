@@ -1,17 +1,17 @@
 # Task4 : A registration restful API ( API end-point,routing, MongoDB, database schema)
-Is a rest api server which can capture a new prospect, display all captured prospects, display one prospect by id, update one prospect by it's id, delete all prospects and delete one prospects by it's id.
+> > > Is a rest api server which can capture a new prospect, display all captured prospects, display one prospect by id, update one prospect by it's id, delete all prospects and delete one prospects by it's id.
 
-Instructions
-    ..* `git clone https://github.com/SweetBeard30/node.git`
-    ..* `cd node/task4:api`
-    ..* `npm install`
-    ..* `npm start`
-    ..* Use Postmam or Insomnia rest api clients to test end-points
-    ..* listens listens to port:9001
-    ..* The back-end service provides the following end points:
-        1. /api/v1.1/addNewProspect (add a new prospect)
-        2. /api/v1.1/deleteAllProspects (delete all prospects)
-        3. /api/v1.1/deleteProspect/:id (delete a single prospect)
-        4. /api/v1.1/allProspects (view all prospects)
-        5. /api/v1.1/viewProspect/:id (view a single prospect)
-        6. /api/v1.1/updateProspect/:id (Update a single prospect)
+## Instructions
+    + git clone https://github.com/SweetBeard30/node.git
+    + cd node/task4:api
+    + npm install
+    + npm start
+    + Use Postmam or Insomnia rest api clients to test end-points
+    + listens listens to port:9001
+    + The back-end service provides the following end points:
+        * /api/v1.1/addNewProspect (add a new prospect)
+        * /api/v1.1/deleteAllProspects (delete all prospects)
+        * /api/v1.1/deleteProspect/:id (delete a single prospect)
+        * /api/v1.1/allProspects (view all prospects)
+        * /api/v1.1/viewProspect/:id (view a single prospect)
+        * /api/v1.1/updateProspect/:id (Update a single prospect)
