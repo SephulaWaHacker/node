@@ -8,7 +8,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const viewProspects = (req,res)=> {
 	Prospects.find((err, prospects) => {
-		console.log(prospects);
 		if (err) return console.error(err);
 		if (prospects.length === 0){
 			return res.status(404).send({
