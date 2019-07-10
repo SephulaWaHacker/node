@@ -1,6 +1,6 @@
 # Task4 : A registration restful API ( API end-point, routing, MongoDB, database schema)
 
-> Is a rest api server which can capture a new prospect, return all captured prospects to a client, return one prospect by id to a client, update one prospect by it's id, delete all prospects and delete one prospects by it's id.
+> is a rest api service for capturing new prospects, viewing all prospects, viewing prospects by id, updating a prospect by id, deleting all prospects and deleting a prospect by id. It's build using express framework.
 
 ### Instructions
     

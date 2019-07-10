@@ -1,5 +1,6 @@
 # Task2 : Request handling (basic routing, post, form, middleware)
-It's a web app which takes a user's form input and displays it on screen as a Json object.
+
+> retrieves a user's input from the the client, manipulates it on the server and returns it as a Json object on the user's screen. It's build using express framework.
 
 ### Instructions
 

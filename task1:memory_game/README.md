@@ -1,11 +1,13 @@
 # MVP
 
-## Task1 : Http server (http, get, serve static files) 
-It's a script which serves a memory game on port 8080.
+# Task1 : Http server (http, get, serve static files) 
 
-Instructions
-     //git clone https://github.com/SweetBeard30/node.git
-     cd node/task1:memory_game
-     npm install
-     npm start
-     view at [Memory game](http://127.0.0.1:8080)
+> serves a static memory game at port:8080. It's build using express framework.
+
+### Instructions
+
+    1. npm install
+    2. npm start 
+    3. listens to port:8080
+
+view at [Memory game](http://127.0.0.1:8080)

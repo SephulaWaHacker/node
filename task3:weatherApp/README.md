@@ -1,9 +1,11 @@
 # Task3 : HTML template engine (Javascript templates, fetch, api)
-> Is a web app which displays Weather conditions, area, country and temparature of a location the user has chosen.
 
-Instructions
-    ⋅⋅* git clone https://github.com/SweetBeard30/node.git
-    ⋅⋅* cd node/task3:weatherApp
-    ⋅⋅* npm install
-    ⋅⋅* npm start
-    ⋅⋅* view at [Weather app](http://127.0.0.1:8880/weather)
+> is weather app which uses open weather api service to get current weather conditions for a location specified by a user and uses the Pug template engine to render results within a webpage.
+
+### Instructions
+
+    1. npm install
+    2. npm start 
+    3. listens to port:9001
+
+view at [Weather app](http://127.0.0.1:8880/weather)

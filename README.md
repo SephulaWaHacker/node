@@ -14,7 +14,9 @@ To run the projects in development-mode.
 
 `cd node/"taskdir"`
 
-`npm install -g nodemon `
+`npm install -g nodemon`
+
+`npm install`
 
 `npm test`
 
